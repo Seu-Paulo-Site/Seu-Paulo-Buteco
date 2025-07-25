@@ -9,8 +9,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
+    <html lang="pt-br">
+      <body className="bg-gray-100 min-h-screen"
+        style={{
+          backgroundImage: "url('/seuButeco img.png')",
+          
+        }}
+      > { children }</body>
+    </html >
   )
 }
