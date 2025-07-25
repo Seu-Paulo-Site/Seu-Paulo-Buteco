@@ -2,18 +2,38 @@
 
 export default function Navbar() {
   return (
-    <nav className="ml-10 flex justify-center w-[90%] h-16 bg-white ">
-      <div className="flex  items-center justify-between ">
-        <img src="/seuButeco img.png" alt="Logo do Seu Paulo Boteco" className="h-14 w-18 bg-white" />
+    <div
+      className="min-h-screen bg-cover bg-center flex flex-col justify-between"
+      style={{ backgroundImage: "url('/Banner.png')" }}
+    >
+      <nav className="mt-4 rounded-md ml-24 flex justify-center w-[80%] h-11 bg-white bg-opacity-90 shadow-md">
+        <div className="flex justify-between items-center w-full px-10">
+          
+          <img
+            src="/seuButeco-img.png"
+            alt="Logo do Seu Paulo Boteco"
+            className="h-9.5 w-auto"
+          />
 
-        <ul className="flex gap-6 text-black font-semibold ">
-          <li className="text-red-800">HOME</li>
-          <li>HÍSTORIAS</li>
-          <li>DIAS E HORÁRIOS</li>
-          <li>CARDÁPIOS</li>
-          <li>HORÁRIOS</li>
-        </ul>
+      
+          <ul className="flex gap-8 text-[12px] text-black font-semibold">
+            <li className="text-red-800 hover:underline cursor-pointer">HOME</li>
+            <li className="hover:text-red-800 cursor-pointer">HISTÓRIAS</li>
+            <li className="hover:text-red-800 cursor-pointer">DIAS E HORÁRIOS</li>
+            <li className="hover:text-red-800 cursor-pointer">CARDÁPIOS</li>
+            <li className="hover:text-red-800 cursor-pointer">HORÁRIOS</li>
+          </ul>
+        </div>
+      </nav>
+      
+      
+      <div className="w-full h-6  flex justify-center mt-8 ">
+        <img
+          src="/brush-dec1.png"
+          alt="Brush decorativo"
+          className="w-full"
+        />
       </div>
-    </nav>
-  );
+    </div>
+  );  
 }
