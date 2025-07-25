@@ -12,7 +12,7 @@ export default function RootLayout({
     <html lang="pt-br">
       <body className="bg-gray-100 min-h-screen"
         style={{
-          backgroundImage: "url('/seuButeco img.png')",
+         
           
         }}
       > { children }</body>
