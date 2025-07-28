@@ -46,9 +46,10 @@ export default function Localizacao() {
                             Angola – Betim/MG
                         </p>
 
-                        <p className="text-lg text-white">
-                            <strong>Telefone:</strong><br />
-                            (31) 99999-9999
+                        <p className="text-lg  text-white">
+                            <strong>Contatos:</strong><br />
+                            (31) 99999-9999 <br />
+                            @seupaulobuteco
                         </p>
 
                         <p className="text-lg text-white">
