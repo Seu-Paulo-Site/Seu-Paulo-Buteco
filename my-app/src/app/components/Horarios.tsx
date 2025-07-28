@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
-import { div } from 'framer-motion/client';
+import { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function Horarios() {
     const dias = [
@@ -14,6 +14,10 @@ export default function Horarios() {
         { dia: 'Sábado', horario: '12h às 02h' },
         { dia: 'Domingo', horario: '12h às 20h' },
     ];
+
+    useEffect(() => {
+        AOS.init({ duration: 1200, once: true });
+    }, []);
 
     return (
         <div className='bg-red-800'>
@@ -32,11 +36,15 @@ export default function Horarios() {
                     <h2
                         className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-8"
                         style={{ fontFamily: "'Dancing Script', cursive" }}
+                        data-aos="fade-left"
+                        data-aos-delay="200"
                     >
                         Horários de Funcionamento
                     </h2>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 text-white text-base sm:text-lg font-semibold">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 text-white text-base sm:text-lg font-semibold"
+                        data-aos="fade-right"
+                        data-aos-delay="200">
                         {dias.map(({ dia, horario }) => (
                             <div
                                 key={dia}
@@ -52,12 +60,11 @@ export default function Horarios() {
                 </div>
             </div>
 
-            {/* Bottom brush responsivo */}
-            <div className="w-full flex justify-center z-10 mb-0">
+            <div className="xl:h-17 lg:h-17 sm-h-20 w-full h-7 flex justify-center mt-8 z-10 mb-0">
                 <img
                     src="/brush-dec1.png"
                     alt="Brush decorativo"
-                    className="w-full max-h-12 sm:max-h-16 md:max-h-20 object-cover"
+                    className="w-full lg:h-18"
                 />
             </div>
         </div>
