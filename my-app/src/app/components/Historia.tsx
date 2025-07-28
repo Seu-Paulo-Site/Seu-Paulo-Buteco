@@ -1,44 +1,79 @@
 'use client';
+import { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function Historia() {
-  return (
-    <div className="bg-white min-h-screen flex items-center justify-center px-4 py-12">
-      <div className="flex flex-col md:flex-row max-w-6xl w-full gap-10">
+    useEffect(() => {
+        AOS.init({ duration: 1200, once: true });
+    }, []);
 
-        {/* Texto (lado esquerdo no desktop, em cima no mobile) */}
-        <div className="flex-1 text-black">
-          <h1 className="text-3xl sm:text-4xl font-bold text-red-800 mb-6">
-            COMO TUDO COMEÇOU...
-          </h1>
+    return (
+        <div
+            className="bg-white min-h-[600px] flex items-center justify-center py-4 sm:py-8 md:py-12"
+            style={{
+                backgroundImage: "url('/img2.png')",
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                backgroundSize: 'cover'
+            }}
+        >
+            <div className="flex flex-col md:flex-row max-w-full md:max-w-6xl w-full gap-4 sm:gap-8 md:gap-10 mx-auto px-2 sm:px-4 md:px-8">
+                {/* Texto */}
+                <div className="flex-1 font-semibold text-black flex flex-col justify-center gap-2 sm:gap-4 md:gap-5">
+                    <h1
+                        data-aos="fade-up"
+                        className="font-destaque whitespace-nowrap text-red-800 font-bold mb-2 sm:mb-4 text-xl xs:text-2xl sm:text-3xl md:text-4xl xl:text-[38px]"
+                        style={{ fontFamily: "'Dancing Script', cursive" }}
+                    >
+                        COMO TUDO COMEÇOU...
+                    </h1>
 
-          <p className="text-base sm:text-lg mb-4">
-            Tudo começou com uma ideia simples: criar um lugar em <strong>Betim</strong> com comida boa, cerveja gelada e um clima diferente de tudo que você já viu.
-          </p>
+                    <p
+                        data-aos="fade-up"
+                        data-aos-delay="100"
+                        className="mb-2 sm:mb-4 text-xs xs:text-sm sm:text-base md:text-lg xl:text-[22px] leading-relaxed"
+                        style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                        Um mineiro e dois paulistas criaram um boteco que mistura o melhor de Minas e São Paulo. Aqui tem comida boa, cerveja gelada e muita resenha!
+                    </p>
 
-          <p className="text-base sm:text-lg mb-4">
-            Um mineiro e dois paulistas se juntaram pra criar esse boteco que mistura o melhor das duas culturas. Daí veio o nome: <strong>Seu Paulo</strong> — uma homenagem a São Paulo e Minas Gerais!
-          </p>
+                    <p
+                        data-aos="fade-up"
+                        data-aos-delay="200"
+                        className="mb-2 sm:mb-4 text-xs xs:text-sm sm:text-base md:text-lg xl:text-[22px] leading-relaxed"
+                        style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                        Atendimento acolhedor, tira-gosto com identidade e um clima único para você se sentir em casa.
+                    </p>
 
-          <p className="text-base sm:text-lg">
-            Aqui vai ter <em>tira-gosto</em> com identidade, atendimento que te chama pelo nome e muita resenha boa! Agora me diz: <strong>quem vai ser o primeiro a puxar a cadeira e brindar com a gente?</strong>
-          </p>
+                    <p
+                        data-aos="fade-up"
+                        data-aos-delay="300"
+                        className="text-xs xs:text-sm sm:text-base md:text-lg xl:text-[22px] leading-relaxed"
+                        style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                        Venha brindar com a gente!
+                    </p>
+                </div>
+
+                <div className="flex-1 flex flex-col gap-3 sm:gap-6 mt-6 md:mt-0">
+    <img
+        data-aos="fade-left"
+        src="/banner.png"
+        alt="Imagem 1"
+        className="self-start w-full max-w-[110px] xs:max-w-[140px] sm:max-w-[180px] md:max-w-md lg:max-w-lg xl:max-w-xl rounded-lg shadow-md"
+        style={{ minWidth: 80, maxWidth: '100%' }}
+    />
+    <img
+        data-aos="fade-right"
+        src="/banner.png"
+        alt="Imagem 2"
+        className="ml-auto w-full max-w-[110px] xs:max-w-[140px] sm:max-w-[180px] md:max-w-md lg:max-w-lg xl:max-w-xl rounded-lg shadow-md"
+        style={{ minWidth: 80, maxWidth: '100%' }}
+    />
+</div>
+            </div>
         </div>
-
-        {/* Imagens (lado direito no desktop, embaixo no mobile) */}
-        <div className="flex-1 flex flex-col gap-6 items-center md:items-end">
-          <img
-            src="/banner.png"
-            alt="Imagem 1"
-            className="w-full max-w-xs sm:max-w-sm rounded-lg shadow-md"
-          />
-          <img
-            src="/brush-dec1.png"
-            alt="Imagem 2"
-            className="w-full max-w-xs sm:max-w-sm rounded-lg shadow-md"
-          />
-        </div>
-
-      </div>
-    </div>
-  );
+    );
 }

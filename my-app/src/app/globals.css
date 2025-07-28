@@ -1,4 +1,6 @@
 @import "tailwindcss";
+/* globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;700&display=swap');
 
 :root {
   --background: #ffffff;
@@ -39,4 +41,8 @@ body {
 
 .fade-up {
   animation: fadeUp 1s ease-out forwards;
+}
+
+html {
+  scroll-behavior: smooth;
 }
