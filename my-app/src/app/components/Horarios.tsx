@@ -20,7 +20,8 @@ export default function Horarios() {
     }, []);
 
     return (
-        <div className='bg-red-800'>
+        <div className='bg-red-800'
+        id="diasehorarios">
 
             <div className="w-full flex justify-center z-10 mb-0">
                 <img

@@ -17,6 +17,7 @@ export default function Historia() {
                 backgroundPosition: 'center',
                 backgroundSize: 'cover'
             }}
+            id='historia'
         >
             <div className="flex flex-col md:flex-row max-w-full md:max-w-6xl w-full gap-4 sm:gap-8 md:gap-10 mx-auto px-2 sm:px-4 md:px-8">
 

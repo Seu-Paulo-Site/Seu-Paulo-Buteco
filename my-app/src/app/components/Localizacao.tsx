@@ -11,12 +11,15 @@ export default function Localizacao() {
     return (
         <div className='bg-red-800 h-130 '>
 
-            <div className="w-full flex justify-center z-10 mb-0">
+            <div className="w-full flex justify-center z-10 mb-0"
+            id='contato'
+            >
                 <img
                     src="/brush-dec1.png"
                     alt="Brush decorativo"
                     className="rotate-180 w-full h-16 sm:max-h-16 md:max-h-20 object-cover -mt-3"
                 />
+                
             </div>
             <section className="bg-red-800 py-16 px-4 flex justify-center">
                 <div className="flex flex-col md:flex-row max-w-6xl w-full gap-8">

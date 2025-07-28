@@ -8,7 +8,7 @@ export default function Navbar() {
 
   const itensNav = [
     { nome: 'HOME', link: '#home' },
-    { nome: 'HISTÓRIAS', link: '#historias' },
+    { nome: 'HISTÓRIAS', link: '#historia' },
     { nome: 'DIAS E HORÁRIOS', link: '#diasehorarios' },
     { nome: 'CARDÁPIO', link: '#cardapio' },
     { nome: 'CONTATO', link: '#contato' },
@@ -18,13 +18,14 @@ export default function Navbar() {
     <div
       className="h-screen bg-no-repeat bg-center bg-cover flex flex-col justify-between relative"
       style={{ backgroundImage: "url('/Banner.png')" }}
+      id="home"
     >
       <nav className="mx-auto mt-6 w-[95%] h-21 flex items-center justify-center bg-white bg-opacity-90 shadow-md rounded-md z-50 relative">
         <div className="flex justify-between items-center w-full px-4 py-3 md:px-10">
           <img
             src="/seuButeco-img.png"
             alt="Logo do Seu Paulo Boteco"
-            className="h-18 h-10 w-auto"
+            className="h-10 w-auto"
           />
 
           <button
@@ -49,7 +50,6 @@ export default function Navbar() {
 
       {menuOpen && (
         <div className="fixed inset-0 z-40 bg-white bg-opacity-95 backdrop-blur-md flex flex-col animate-slide-fade">
-          {/* Botão X fixo no topo direito */}
           <button
             onClick={() => setMenuOpen(false)}
             aria-label="Fechar menu"

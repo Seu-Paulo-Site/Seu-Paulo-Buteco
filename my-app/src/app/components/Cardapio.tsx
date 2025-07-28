@@ -10,7 +10,9 @@ export default function Cardapio() {
   const cardapioLink = "https://seusite.com.br/cardapio.pdf";
 
   return (
-    <section className="bg-white w-full flex flex-col items-center justify-center py-10 relative">
+    <section className="bg-white w-full flex flex-col items-center justify-center py-10 relative"
+    id='cardapio'
+    >
       <h2
         className="text-center text-xl sm:text-2xl md:text-3xl font-bold mb-8 text-red-700 tracking-wide"
         style={{ fontFamily: "'Montserrat', sans-serif" }}
