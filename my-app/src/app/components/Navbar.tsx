@@ -77,11 +77,11 @@ export default function Navbar() {
       )}
 
       {/* Brush decorativo */}
-      <div className="xl:h-15 l:h-30 w-full h-6 flex justify-center mt-8 z-10 mb-0">
+      <div className="xl:h-17 lg:h-17 sm-h-20 w-full h-7 flex justify-center mt-8 z-10 mb-0">
         <img
           src="/brush-dec1.png"
           alt="Brush decorativo"
-          className="w-full"
+          className="w-full lg:h-18"
         />
       </div>
     </div>
