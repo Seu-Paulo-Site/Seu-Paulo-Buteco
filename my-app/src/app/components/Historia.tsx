@@ -24,7 +24,7 @@ export default function Historia() {
                 <div className="flex-1 font-semibold text-black flex flex-col justify-center gap-2 sm:gap-4 md:gap-5">
                     <h1
                         data-aos="fade-up"
-                        className="font-[Poppins,sans-serif] whitespace-nowrap text-red-800 font-bold mb-2 sm:mb-4 text-xl xs:text-2xl sm:text-3xl md:text-4xl xl:text-[38px]"
+                        className="font-cheap-pine whitespace-nowrap text-red-800 font-bold mb-2 sm:mb-4 text-xl xs:text-2xl sm:text-3xl md:text-4xl xl:text-[38px]"
                         
                     >
                         COMO TUDO COMEÇOU...
@@ -61,14 +61,14 @@ export default function Historia() {
                 <div className="flex-1 flex flex-col gap-3 sm:gap-6 mt-6 md:mt-0">
                     <img
                         data-aos="fade-left"
-                        src="/banner.png"
+                        src="/frentebar.png"
                         alt="Imagem 1"
                         className="self-start w-full max-w-[110px] xs:max-w-[140px] sm:max-w-[180px] md:max-w-md lg:max-w-lg xl:max-w-xl rounded-lg shadow-md"
                         style={{ minWidth: 80, maxWidth: '100%' }}
                     />
                     <img
                         data-aos="fade-right"
-                        src="/banner.png"
+                        src="/prato.png"
                         alt="Imagem 2"
                         className="ml-auto w-full max-w-[110px] xs:max-w-[140px] sm:max-w-[180px] md:max-w-md lg:max-w-lg xl:max-w-xl rounded-lg shadow-md"
                         style={{ minWidth: 80, maxWidth: '100%' }}

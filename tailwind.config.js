@@ -13,6 +13,8 @@ module.exports = {
                 destaque: ['"Dancing Script"', 'cursive'],
                 texto: ['Montserrat', 'sans-serif'],
                 poppins: ['Poppins', 'sans-serif'],
+                'cheap-pine': ['Cheap Pine W00 Sans', 'sans-serif'],
+                'nitti': ['Nitti Normal', 'monospace'],
             },
             keyframes: {
                 slideFade: {

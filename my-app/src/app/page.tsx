@@ -32,7 +32,7 @@ export default function Home() {
         </svg>
       </a>
       <a
-        href="https://wa.me/5511941078460"
+        href="https://wa.me/553173529146"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-all duration-300"

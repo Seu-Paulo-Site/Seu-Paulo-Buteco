@@ -9,19 +9,17 @@ export default function Cardapio() {
     AOS.init({ duration: 800 });
   }, []);
 
-  const cardapioLink = "/cardapio.pdf"; // coloque esse arquivo dentro da pasta /public
-
   const cards = [
     {
       img: "/cardapio1.jpg",
       verso: "/cardapio2.jpg",
       textoFrente: "COMIDAS E BEBIDAS",
-      textoVerso: "NOVOS PRATOS EM BREVE!",
+      textoVerso: "SABORES EXCLUSIVOS!",
       link: "./cardapiofinal.pdf",
     },
     {
-      img: "/cardapio1.jpg",
-      verso: "/cardapio2.jpg",
+      img: "/cardapi32.jpg",
+      verso: "/cardapi32.jpg",
       textoFrente: "CAIPIRINHAS",
       textoVerso: "SABORES EXCLUSIVOS!",
       link: "./caipirinha.pdf",
