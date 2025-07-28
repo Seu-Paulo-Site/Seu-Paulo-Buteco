@@ -7,11 +7,11 @@ import 'aos/dist/aos.css';
 export default function Horarios() {
     const dias = [
         { dia: 'Segunda-feira', horario: 'Fechado' },
-        { dia: 'Terça-feira', horario: '17h às 23h' },
+        { dia: 'Terça-feira', horario: 'Fechado' },
         { dia: 'Quarta-feira', horario: '17h às 23h' },
         { dia: 'Quinta-feira', horario: '17h às 23h' },
-        { dia: 'Sexta-feira', horario: '17h às 02h' },
-        { dia: 'Sábado', horario: '12h às 02h' },
+        { dia: 'Sexta-feira', horario: '17h às 23h' },
+        { dia: 'Sábado', horario: '12h às 23h' },
         { dia: 'Domingo', horario: '12h às 20h' },
     ];
 
@@ -35,8 +35,7 @@ export default function Horarios() {
             <div className="bg-red-800 py-10 px-2 sm:py-16 sm:px-4 flex justify-center">
                 <div className="max-w-4xl w-full text-center">
                     <h2
-                        className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-8"
-                        style={{ fontFamily: "'Dancing Script', cursive" }}
+                        className="font-[Poppins,sans-serif] text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-8"
                         data-aos="fade-left"
                         data-aos-delay="200"
                     >

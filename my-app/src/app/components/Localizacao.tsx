@@ -57,10 +57,9 @@ export default function Localizacao() {
 
                         <p className="text-lg text-white">
                             <strong>Funcionamento:</strong><br />
-                            Terça a Sexta: 17h às 02h<br />
-                            Sábados: 12h às 02h<br />
+                            Quarta a Sexta: 17h às 23h<br />
+                            Sábados: 12h às 23h<br />
                             Domingos: 12h às 20h<br />
-                            Segundas: Fechado
                         </p>
 
                         <a

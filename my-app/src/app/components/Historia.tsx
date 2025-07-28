@@ -24,8 +24,8 @@ export default function Historia() {
                 <div className="flex-1 font-semibold text-black flex flex-col justify-center gap-2 sm:gap-4 md:gap-5">
                     <h1
                         data-aos="fade-up"
-                        className="font-destaque whitespace-nowrap text-red-800 font-bold mb-2 sm:mb-4 text-xl xs:text-2xl sm:text-3xl md:text-4xl xl:text-[38px]"
-                        style={{ fontFamily: "'Dancing Script', cursive" }}
+                        className="font-[Poppins,sans-serif] whitespace-nowrap text-red-800 font-bold mb-2 sm:mb-4 text-xl xs:text-2xl sm:text-3xl md:text-4xl xl:text-[38px]"
+                        
                     >
                         COMO TUDO COMEÇOU...
                     </h1>

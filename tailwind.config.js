@@ -12,6 +12,7 @@ module.exports = {
             fontFamily: {
                 destaque: ['"Dancing Script"', 'cursive'],
                 texto: ['Montserrat', 'sans-serif'],
+                poppins: ['Poppins', 'sans-serif'],
             },
             keyframes: {
                 slideFade: {
