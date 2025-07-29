@@ -42,7 +42,7 @@ export default function Horarios() {
                         Horários de Funcionamento
                     </h2>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 text-white text-base sm:text-lg font-semibold"
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 text-white text-base sm:text-lg "
                         data-aos="fade-right"
                         data-aos-delay="200">
                         {dias.map(({ dia, horario }) => (
