@@ -18,7 +18,7 @@ export default function Navbar() {
   const [text] = useTypewriter({
     words: ['"Mais fácil sair de Minas do que sair do buteco."'],
     delaySpeed: 2000,
-    typeSpeed: 60,
+    typeSpeed: 35,
   });
 
   return (
