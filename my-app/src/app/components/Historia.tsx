@@ -70,7 +70,7 @@ export default function Historia() {
                         data-aos="fade-right"
                         src="/prato.png"
                         alt="Imagem 2"
-                        className="ml-auto w-full max-w-[110px] xs:max-w-[140px] sm:max-w-[180px] md:max-w-md lg:max-w-lg xl:max-w-xl rounded-lg shadow-md"
+                        className="xl:ml-33 ml-auto w-full max-w-[110px] xs:max-w-[140px] sm:max-w-[180px] md:max-w-md lg:max-w-lg xl:max-w-xl rounded-lg shadow-md"
                         style={{ minWidth: 80, maxWidth: '100%' }}
                     />
                 </div>

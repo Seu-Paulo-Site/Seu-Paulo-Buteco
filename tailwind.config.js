@@ -9,6 +9,7 @@ module.exports = {
             animation: {
                 'slide-fade': 'slideFade 0.4s ease-out',
             },
+            
             fontFamily: {
                 destaque: ['"Dancing Script"', 'cursive'],
                 texto: ['Montserrat', 'sans-serif'],
