@@ -118,7 +118,7 @@ export default function Navbar() {
         </a>
       </div>
 
-      <div className="w-full z-10">
+      <div className="w-full  z-10">
         <img
           src="/brush-dec1.png"
           alt="Brush decorativo"
