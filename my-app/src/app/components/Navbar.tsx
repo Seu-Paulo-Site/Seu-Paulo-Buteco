@@ -34,7 +34,7 @@ export default function Navbar() {
         }}
       ></div>
 
-      <nav className="mx-auto mt-8 w-[88%] h-21 flex items-center justify-center bg-white bg-opacity-90 shadow-md rounded-md z-50 relative">
+      <nav className="mx-auto mt-8 w-[88%] h-21 flex items-center justify-center bg-white bg-opacity-90 shadow-md rounded-xl z-50 relative">
         <div className="flex justify-between items-center w-full px-4 py-3 md:px-10">
           <img
             src="/seuButeco-img.png"
