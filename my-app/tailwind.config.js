@@ -3,13 +3,17 @@ module.exports = {
     content: [
         "./src/app/**/*.{js,ts,jsx,tsx}",
         "./src/components/**/*.{js,ts,jsx,tsx}",
+        "./src/pages/**/*.{js,ts,jsx,tsx}",
+        "./pages/**/*.{js,ts,jsx,tsx}",
+        "./public/**/*.html",
+        "./index.html",
     ],
     theme: {
         extend: {
             animation: {
                 'slide-fade': 'slideFade 0.4s ease-out',
             },
-            
+
             fontFamily: {
                 destaque: ['"Dancing Script"', 'cursive'],
                 texto: ['Montserrat', 'sans-serif'],
