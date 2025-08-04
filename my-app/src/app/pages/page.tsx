@@ -6,7 +6,7 @@ import Horarios from '@/app/components/Horarios';
 import Cardapio from '@/app/components/Cardapio';
 import Localizacao from '@/app/components/Localizacao';
 
-import '@/globals.css';
+import '@/app/globals.css';
 
 export default function Home() {
   return (
