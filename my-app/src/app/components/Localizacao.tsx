@@ -51,7 +51,7 @@ export default function Localizacao() {
 
                         <p className="text-lg  text-white">
                             <strong>Contatos:</strong><br />
-                            +55 (31) 7352-9146 <br />
+                            (31) 7352-9146 <br />
                             @seupaulobuteco
                         </p>
 
