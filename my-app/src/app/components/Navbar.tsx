@@ -16,7 +16,7 @@ export default function Navbar() {
   ];
 
   const [text] = useTypewriter({
-    words: ['"Mais fácil sair de Minas do que sair do buteco."'],
+    words: ['"Dinheiro não compra felicidade, mas compra cerveja, que é quase a mesma coisa!"'],
     delaySpeed: 2000,
     typeSpeed: 35,
   });
