@@ -1,12 +1,12 @@
 'use client';
 
-import Navbar from './components/Navbar';
-import Historia from './components/Historia';
-import Horarios from './components/Horarios';
-import Cardapio from './components/Cardapio';
-import Localizacao from './components/Localizacao';
+import Navbar from '@/app/components/Navbar';
+import Historia from '@/app/components/Historia';
+import Horarios from '@/app/components/Horarios';
+import Cardapio from '@/app/components/Cardapio';
+import Localizacao from '@/app/components/Localizacao';
 
-import './globals.css';
+import '@/globals.css';
 
 export default function Home() {
   return (
