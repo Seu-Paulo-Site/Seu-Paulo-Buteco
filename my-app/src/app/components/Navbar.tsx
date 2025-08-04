@@ -118,11 +118,11 @@ export default function Navbar() {
         </a>
       </div>
 
-      <div className="w-full  z-10">
+      <div className="w-full z-10">
         <img
           src="/brush-dec1.png"
           alt="Brush decorativo"
-          className="w-full object-contain"
+          className="w-full mb-[-6px] object-contain"
         />
       </div>
     </div>
