@@ -73,7 +73,6 @@ export default function Navbar() {
             aria-label="Fechar menu"
             className="absolute top-4 right-4 p-2 rounded-full hover:bg-red-100 transition"
           >
-            <X size={28} className="text-red-800" />
           </button>
 
           <div className="flex-1 flex flex-col items-center justify-center gap-6">
