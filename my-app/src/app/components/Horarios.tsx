@@ -10,9 +10,9 @@ export default function Horarios() {
         { dia: 'Terça-feira', horario: 'Fechado' },
         { dia: 'Quarta-feira', horario: '17h às 23h' },
         { dia: 'Quinta-feira', horario: '17h às 23h' },
-        { dia: 'Sexta-feira', horario: '17h às 23h' },
-        { dia: 'Sábado', horario: '12h às 23h' },
-        { dia: 'Domingo', horario: '12h às 20h' },
+        { dia: 'Sexta-feira', horario: '17h às 00h' },
+        { dia: 'Sábado', horario: '12h às 00h' },
+        { dia: 'Domingo', horario: '12h às 17h' },
     ];
 
     useEffect(() => {
