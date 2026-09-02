@@ -70,14 +70,25 @@ export const CARDAPIOS = [
 /** Minutos desde a meia-noite. Fechamento pode passar de 1440 (madrugada). */
 type Janela = { abre: number; fecha: number };
 
-export const DIAS: { dia: string; curto: string; janela: Janela | null }[] = [
-  { dia: 'Domingo', curto: 'Dom', janela: { abre: 12 * 60, fecha: 17 * 60 } },
-  { dia: 'Segunda-feira', curto: 'Seg', janela: null },
-  { dia: 'Terça-feira', curto: 'Ter', janela: null },
-  { dia: 'Quarta-feira', curto: 'Qua', janela: { abre: 17 * 60, fecha: 23 * 60 } },
-  { dia: 'Quinta-feira', curto: 'Qui', janela: { abre: 17 * 60, fecha: 23 * 60 } },
-  { dia: 'Sexta-feira', curto: 'Sex', janela: { abre: 17 * 60, fecha: 24 * 60 } },
-  { dia: 'Sábado', curto: 'Sáb', janela: { abre: 12 * 60, fecha: 24 * 60 } },
+type Dia = {
+  dia: string;
+  curto: string;
+  /** Serviço de almoço. */
+  almoco: Janela | null;
+  /** Serviço da tarde/noite. Segunda e terça a casa só abre no almoço. */
+  noite: Janela | null;
+};
+
+const h = (hora: number, min = 0) => hora * 60 + min;
+
+export const DIAS: Dia[] = [
+  { dia: 'Domingo', curto: 'Dom', almoco: { abre: h(11, 30), fecha: h(15) }, noite: { abre: h(15), fecha: h(17) } },
+  { dia: 'Segunda-feira', curto: 'Seg', almoco: { abre: h(11, 30), fecha: h(15) }, noite: null },
+  { dia: 'Terça-feira', curto: 'Ter', almoco: { abre: h(11, 30), fecha: h(15) }, noite: null },
+  { dia: 'Quarta-feira', curto: 'Qua', almoco: { abre: h(11, 30), fecha: h(15) }, noite: { abre: h(17), fecha: h(23) } },
+  { dia: 'Quinta-feira', curto: 'Qui', almoco: { abre: h(11, 30), fecha: h(15) }, noite: { abre: h(17), fecha: h(23) } },
+  { dia: 'Sexta-feira', curto: 'Sex', almoco: { abre: h(11, 30), fecha: h(15) }, noite: { abre: h(17), fecha: h(24) } },
+  { dia: 'Sábado', curto: 'Sáb', almoco: { abre: h(11, 30), fecha: h(15) }, noite: { abre: h(17), fecha: h(24) } },
 ];
 
 /** Ordem de leitura das listas: a semana do bar começa na segunda, não no domingo. */
@@ -86,14 +97,25 @@ export const ORDEM_SEMANA = [1, 2, 3, 4, 5, 6, 0];
 export function formatarHora(minutos: number): string {
   const m = minutos % (24 * 60);
   if (m === 0) return '00h'; // fechamento na virada do dia
-  const h = Math.floor(m / 60);
+  const hora = Math.floor(m / 60);
   const min = m % 60;
-  return min === 0 ? `${h}h` : `${h}h${String(min).padStart(2, '0')}`;
+  return min === 0 ? `${hora}h` : `${hora}h${String(min).padStart(2, '0')}`;
 }
 
-export function faixaDoDia(indice: number): string {
-  const j = DIAS[indice].janela;
+export function faixa(j: Janela | null): string {
   return j ? `${formatarHora(j.abre)} às ${formatarHora(j.fecha)}` : 'Fechado';
+}
+
+/** As duas faixas do dia, já formatadas, para as listas do site. */
+export function faixasDoDia(indice: number): { almoco: string; noite: string } {
+  const d = DIAS[indice];
+  return { almoco: faixa(d.almoco), noite: faixa(d.noite) };
+}
+
+/** Todas as janelas de um dia, em ordem. */
+function janelasDoDia(indice: number): Janela[] {
+  const d = DIAS[indice];
+  return [d.almoco, d.noite].filter((j): j is Janela => j !== null);
 }
 
 /** Data/hora corrente no fuso do bar, independente do fuso de quem acessa. */
@@ -131,44 +153,40 @@ export function statusAgora(): Status {
 
   // A casa pode estar aberta por causa da véspera (sexta e sábado viram o dia).
   const ontem = (dia + 6) % 7;
-  const janelaOntem = DIAS[ontem].janela;
-  if (janelaOntem && janelaOntem.fecha > 24 * 60 && minutos < janelaOntem.fecha - 24 * 60) {
-    return {
-      aberto: true,
-      rotulo: 'Aberto agora',
-      detalhe: `até ${formatarHora(janelaOntem.fecha)}`,
-      hoje: dia,
-    };
+  for (const j of janelasDoDia(ontem)) {
+    if (j.fecha > 24 * 60 && minutos < j.fecha - 24 * 60) {
+      return { aberto: true, rotulo: 'Aberto agora', detalhe: `até ${formatarHora(j.fecha)}`, hoje: dia };
+    }
   }
 
-  const hoje = DIAS[dia].janela;
-  if (hoje && minutos >= hoje.abre && minutos < hoje.fecha) {
-    return {
-      aberto: true,
-      rotulo: 'Aberto agora',
-      detalhe: `até ${formatarHora(hoje.fecha)}`,
-      hoje: dia,
-    };
+  const hoje = janelasDoDia(dia);
+
+  for (const j of hoje) {
+    if (minutos >= j.abre && minutos < j.fecha) {
+      return { aberto: true, rotulo: 'Aberto agora', detalhe: `até ${formatarHora(j.fecha)}`, hoje: dia };
+    }
   }
 
-  if (hoje && minutos < hoje.abre) {
+  // Ainda vai abrir hoje?
+  const proximaHoje = hoje.find((j) => minutos < j.abre);
+  if (proximaHoje) {
     return {
       aberto: false,
       rotulo: 'Fechado',
-      detalhe: `abre hoje às ${formatarHora(hoje.abre)}`,
+      detalhe: `abre hoje às ${formatarHora(proximaHoje.abre)}`,
       hoje: dia,
     };
   }
 
   for (let i = 1; i <= 7; i++) {
     const proximo = (dia + i) % 7;
-    const janela = DIAS[proximo].janela;
-    if (janela) {
+    const [primeira] = janelasDoDia(proximo);
+    if (primeira) {
       const quando = i === 1 ? 'amanhã' : DIAS[proximo].dia.replace('-feira', '');
       return {
         aberto: false,
         rotulo: 'Fechado',
-        detalhe: `abre ${quando} às ${formatarHora(janela.abre)}`,
+        detalhe: `abre ${quando} às ${formatarHora(primeira.abre)}`,
         hoje: dia,
       };
     }
@@ -176,3 +194,4 @@ export function statusAgora(): Status {
 
   return { aberto: false, rotulo: 'Fechado', detalhe: 'consulte os horários', hoje: dia };
 }
+
