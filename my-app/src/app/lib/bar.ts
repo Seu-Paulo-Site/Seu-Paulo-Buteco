@@ -52,18 +52,18 @@ export const NAV = [
 
 export const CARDAPIOS = [
   {
-    categoria: 'Cozinha',
+    categoria: 'Cozinha & Bar',
     titulo: 'Comidas & Bebidas',
-    resumo: 'Entradas, conservas, porções e tira-gostos pra dividir na mesa.',
+    resumo: 'Petiscos, porções, cervejas, drinks e as caipirinhas da casa.',
     imagem: '/menu-comidas.jpg',
     arquivo: '/cardapiofinal.pdf',
   },
   {
-    categoria: 'Bar',
-    titulo: 'Caipirinhas',
-    resumo: 'Cachaça mineira, frutas da estação e combinações da casa.',
-    imagem: '/menu-caipirinhas.jpg',
-    arquivo: '/caipirinha.pdf',
+    categoria: 'Almoço',
+    titulo: 'Prato do Dia',
+    resumo: 'Um especial por dia, com arroz, feijão, farofa, ovo e salada.',
+    imagem: '/prato.jpg',
+    arquivo: '/almoco.pdf',
   },
 ] as const;
 
