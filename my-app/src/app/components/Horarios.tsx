@@ -89,7 +89,7 @@ export default function Horarios() {
 
         <Reveal delay={200}>
           <p className="mt-10 text-center font-mono text-[11px] leading-relaxed tracking-wider text-cream/35">
-            Segunda e terça a casa abre só no almoço · Horário de Brasília
+            Segunda a casa fecha · na terça abre só no almoço · Horário de Brasília
             <br />
             Em feriados, confirme pelo WhatsApp
           </p>

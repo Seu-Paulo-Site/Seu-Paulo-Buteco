@@ -75,7 +75,7 @@ type Dia = {
   curto: string;
   /** Serviço de almoço. */
   almoco: Janela | null;
-  /** Serviço da tarde/noite. Segunda e terça a casa só abre no almoço. */
+  /** Serviço da tarde/noite. Na terça a casa só abre no almoço. */
   noite: Janela | null;
 };
 
@@ -83,7 +83,7 @@ const h = (hora: number, min = 0) => hora * 60 + min;
 
 export const DIAS: Dia[] = [
   { dia: 'Domingo', curto: 'Dom', almoco: { abre: h(11, 30), fecha: h(15) }, noite: { abre: h(15), fecha: h(17) } },
-  { dia: 'Segunda-feira', curto: 'Seg', almoco: { abre: h(11, 30), fecha: h(15) }, noite: null },
+  { dia: 'Segunda-feira', curto: 'Seg', almoco: null, noite: null },
   { dia: 'Terça-feira', curto: 'Ter', almoco: { abre: h(11, 30), fecha: h(15) }, noite: null },
   { dia: 'Quarta-feira', curto: 'Qua', almoco: { abre: h(11, 30), fecha: h(15) }, noite: { abre: h(17), fecha: h(23) } },
   { dia: 'Quinta-feira', curto: 'Qui', almoco: { abre: h(11, 30), fecha: h(15) }, noite: { abre: h(17), fecha: h(23) } },
@@ -110,6 +110,30 @@ export function faixa(j: Janela | null): string {
 export function faixasDoDia(indice: number): { almoco: string; noite: string } {
   const d = DIAS[indice];
   return { almoco: faixa(d.almoco), noite: faixa(d.noite) };
+}
+
+/**
+ * Resume o almoço numa linha só, enquanto o horário for igual em todos os dias
+ * em que ele existe e esses dias forem seguidos. Se algum divergir, devolve null
+ * e quem chama volta a listar dia a dia.
+ */
+export function resumoAlmoco(): { dias: string; horario: string } | null {
+  const posicoes = ORDEM_SEMANA.map((i, pos) => ({ d: DIAS[i], pos })).filter(({ d }) => d.almoco);
+  if (posicoes.length === 0) return null;
+
+  const ref = posicoes[0].d.almoco as Janela;
+  const mesmoHorario = posicoes.every(
+    ({ d }) => d.almoco?.abre === ref.abre && d.almoco?.fecha === ref.fecha,
+  );
+  const seguidos = posicoes.every(({ pos }, k) => pos === posicoes[0].pos + k);
+  if (!mesmoHorario || !seguidos) return null;
+
+  const dias =
+    posicoes.length === 7
+      ? 'Todos os dias'
+      : `${posicoes[0].d.curto} a ${posicoes[posicoes.length - 1].d.curto}`;
+
+  return { dias, horario: faixa(ref) };
 }
 
 /** Todas as janelas de um dia, em ordem. */

@@ -1,17 +1,11 @@
 import Image from 'next/image';
 import { Instagram, MessageCircle } from 'lucide-react';
-import { BAR, DIAS, NAV, ORDEM_SEMANA, faixa } from '@/app/lib/bar';
+import { BAR, DIAS, NAV, ORDEM_SEMANA, faixa, resumoAlmoco } from '@/app/lib/bar';
 
 export default function Footer() {
   const semana = ORDEM_SEMANA.map((i) => ({ ...DIAS[i], i }));
   const comNoite = semana.filter((d) => d.noite);
-
-  // O almoço hoje é igual todo dia; se um dia divergir, a lista deixa de colapsar.
-  const almocoPadrao = semana[0].almoco;
-  const almocoIgualTodoDia = semana.every(
-    (d) =>
-      d.almoco?.abre === almocoPadrao?.abre && d.almoco?.fecha === almocoPadrao?.fecha,
-  );
+  const almoco = resumoAlmoco();
 
   return (
     <footer className="border-t border-cream/10 bg-ink-2 px-5 pt-20 pb-10 sm:px-8">
@@ -71,11 +65,11 @@ export default function Footer() {
           <div>
             <h2 className="eyebrow text-cream/35">Almoço</h2>
             <ul className="mt-5 space-y-3">
-              {almocoIgualTodoDia ? (
+              {almoco ? (
                 <li className="flex justify-between gap-4 text-sm">
-                  <span className="text-cream/65">Todos os dias</span>
+                  <span className="text-cream/65">{almoco.dias}</span>
                   <span className="font-mono text-[12px] tabular-nums text-cream/45">
-                    {faixa(almocoPadrao)}
+                    {almoco.horario}
                   </span>
                 </li>
               ) : (
@@ -104,7 +98,7 @@ export default function Footer() {
               ))}
             </ul>
             <p className="mt-4 text-[13px] leading-relaxed text-cream/35">
-              Segunda e terça, só almoço.
+              Segunda fechado · terça só almoço.
             </p>
 
             <address className="mt-7 text-sm leading-relaxed text-cream/50 not-italic">
