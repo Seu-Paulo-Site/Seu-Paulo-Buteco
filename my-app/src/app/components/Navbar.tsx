@@ -1,129 +1,168 @@
 'use client';
 
-import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
-import { useTypewriter, Cursor } from 'react-simple-typewriter';
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import { Instagram, Menu, X } from 'lucide-react';
+import { BAR, NAV } from '@/app/lib/bar';
 
 export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [aberto, setAberto] = useState(false);
+  const [rolou, setRolou] = useState(false);
 
-  const itensNav = [
-    { nome: 'HOME', link: '#home' },
-    { nome: 'HISTÓRIA', link: '#historia' },
-    { nome: 'DIAS E HORÁRIOS', link: '#diasehorarios' },
-    { nome: 'CARDÁPIO', link: '#cardapio' },
-    { nome: 'CONTATO', link: '#contato' },
-  ];
+  useEffect(() => {
+    const aoRolar = () => setRolou(window.scrollY > 24);
+    aoRolar();
+    window.addEventListener('scroll', aoRolar, { passive: true });
+    return () => window.removeEventListener('scroll', aoRolar);
+  }, []);
 
-  const [text] = useTypewriter({
-    words: ['"Dinheiro não compra felicidade, mas compra cerveja, que é quase a mesma coisa!"'],
-    delaySpeed: 2000,
-    typeSpeed: 35,
-  });
+  // Trava o scroll do fundo e fecha no Esc enquanto o menu está aberto.
+  useEffect(() => {
+    if (!aberto) return;
+
+    const aoTeclar = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setAberto(false);
+    };
+
+    const overflowAnterior = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', aoTeclar);
+
+    return () => {
+      document.body.style.overflow = overflowAnterior;
+      window.removeEventListener('keydown', aoTeclar);
+    };
+  }, [aberto]);
 
   return (
-    <div
-      className="relative h-screen w-full flex flex-col justify-between overflow-hidden"
-      id="home"
-    >
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/Banner.png')",
-        }}
-      ></div>
-
-      <nav className="mx-auto mt-8 w-[88%] h-21 flex items-center justify-center bg-white bg-opacity-90 shadow-md rounded-xl z-50 relative">
-        <div className="flex justify-between items-center w-full px-4 py-3 md:px-10">
-          <img
-            src="/seuButeco-img.png"
-            alt="Logo do Seu Paulo Boteco"
-            className="h-15 w-auto"
-          />
-
-          <button
-            className="md:hidden text-red-800"
-            onClick={() => setMenuOpen((open) => !open)}
-            aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
+    // O menu mobile fica FORA do <header> de propósito: o backdrop-blur do
+    // header cria bloco de contenção e achataria um filho `position: fixed`.
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow] duration-300 ${
+          rolou || aberto
+            ? 'border-b border-cream/10 bg-ink/85 shadow-[0_10px_40px_-24px_rgba(0,0,0,0.9)] backdrop-blur-md'
+            : 'border-b border-transparent bg-transparent'
+        }`}
+        style={{ paddingTop: 'env(safe-area-inset-top)' }}
+      >
+        <div className="mx-auto flex h-18 w-full max-w-7xl items-center justify-between gap-6 px-5 sm:px-8">
+          <a
+            href="#home"
+            className="-my-2 shrink-0 py-2 transition-opacity duration-200 hover:opacity-80"
+            aria-label={`${BAR.nome} — ir para o início`}
           >
-            {menuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
+            <Image
+              src="/logo-light.png"
+              alt={BAR.nome}
+              width={1100}
+              height={516}
+              priority
+              className="h-9 w-auto sm:h-11"
+            />
+          </a>
 
-          <ul className="xl:text-[20px] xl:gap-20 md:text-[7px] hidden md:flex md:gap-4 gap-8 text-[12px] md:text-[14px] text-black font-semibold">
-            {itensNav.map((item, key) => (
-              <li key={key}>
-                <a
-                  href={item.link}
-                  className="font-[Poppins,sans-serif] text-black hover:text-red-800"
-                >
-                  {item.nome}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </nav>
+          <nav aria-label="Navegação principal" className="hidden lg:block">
+            <ul className="flex items-center gap-8">
+              {NAV.map((item) => (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    className="group relative block py-2 font-mono text-[12px] tracking-[0.18em] text-cream/70 uppercase transition-colors duration-200 hover:text-cream"
+                  >
+                    {item.nome}
+                    <span
+                      aria-hidden="true"
+                      className="absolute bottom-0 left-0 h-px w-0 bg-brand-2 transition-[width] duration-300 ease-out group-hover:w-full"
+                    />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
+          <div className="flex items-center gap-3">
+            <a
+              href={BAR.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram do Seu Paulo Buteco"
+              className="hidden h-11 w-11 items-center justify-center rounded-full border border-cream/15 text-cream/70 transition-colors duration-200 hover:border-cream/40 hover:text-cream sm:flex"
+            >
+              <Instagram size={17} aria-hidden="true" />
+            </a>
 
-      {menuOpen && (
-        <div className="fixed inset-0 z-40 bg-white bg-opacity-95 backdrop-blur-md flex flex-col animate-slide-fade">
-          <button
-            onClick={() => setMenuOpen(false)}
-            aria-label="Fechar menu"
-            className="absolute top-4 right-4 p-2 rounded-full hover:bg-red-100 transition"
-          >
-          </button>
+            <a
+              href="#cardapio"
+              className="hidden rounded-full bg-brand px-5 py-3 font-mono text-[12px] tracking-[0.18em] text-cream uppercase transition-colors duration-200 hover:bg-brand-2 sm:inline-block"
+            >
+              Cardápio
+            </a>
 
-          <div className="flex-1 flex flex-col items-center justify-center gap-6">
-            {itensNav.map((item, key) => (
-              <a
-                key={key}
-                href={item.link}
-                className="text-red-800 font-bold text-xl hover:underline transition-all duration-300"
-                onClick={() => setMenuOpen(false)}
-              >
-                {item.nome}
-              </a>
-            ))}
+            <button
+              type="button"
+              onClick={() => setAberto((v) => !v)}
+              aria-label={aberto ? 'Fechar menu' : 'Abrir menu'}
+              aria-expanded={aberto}
+              aria-controls="menu-mobile"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-cream/15 text-cream transition-colors duration-200 hover:border-cream/40 lg:hidden"
+            >
+              {aberto ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
+            </button>
           </div>
         </div>
-      )}
+      </header>
 
-      
-
-      <div className="flex-grow flex items-center justify-center text-center px-6 z-10">
-        <h1 className="text-white font-bold text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl leading-snug max-w-4xl">
-          {text}
-          <Cursor cursorStyle="|" />
-        </h1>
-      </div>
-
-      <div className="flex justify-center mt-6 z-10">
-        <a
-          href="#historia"
-          className="flex flex-col items-center text-white transition-colors"
+      {aberto && (
+        <div
+          id="menu-mobile"
+          className="fixed inset-x-0 bottom-0 z-40 overflow-y-auto overscroll-contain bg-ink/98 backdrop-blur-lg lg:hidden"
+          style={{ top: 'calc(4.5rem + env(safe-area-inset-top))' }}
         >
-          <span className="text-lg font-semibold tracking-wide">Conheça mais</span>
-          <svg
-            className="w-6 h-6 mt-1 animate-bounce"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-          </svg>
-        </a>
-      </div>
+          <nav aria-label="Navegação principal (celular)" className="px-6 pt-8 pb-14">
+            <ul className="flex flex-col">
+              {NAV.map((item, i) => (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    onClick={() => setAberto(false)}
+                    className="flex items-baseline gap-4 border-b border-cream/10 py-4 transition-colors duration-200 hover:text-brand-2"
+                  >
+                    <span className="font-mono text-[11px] text-cream/35 tabular-nums">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span className="display text-3xl">{item.nome}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
 
-      <div className="w-full z-10">
-        <img
-          src="/brush-dec1.png"
-          alt="Brush decorativo"
-          className="w-full mb-[-6px] object-contain"
-        />
-      </div>
-    </div>
+            <div className="mt-10 flex flex-col gap-3">
+              <a
+                href="#cardapio"
+                onClick={() => setAberto(false)}
+                className="rounded-full bg-brand px-6 py-4 text-center font-mono text-[12px] tracking-[0.18em] text-cream uppercase transition-colors duration-200 hover:bg-brand-2"
+              >
+                Ver Cardápio
+              </a>
+              <a
+                href={BAR.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full border border-cream/20 px-6 py-4 text-center font-mono text-[12px] tracking-[0.18em] text-cream uppercase transition-colors duration-200 hover:border-cream/50"
+              >
+                Chamar no WhatsApp
+              </a>
+            </div>
+
+            <address className="mt-10 font-mono text-[11px] leading-relaxed tracking-wider text-cream/40 not-italic">
+              {BAR.endereco}
+              <br />
+              {BAR.bairro}
+            </address>
+          </nav>
+        </div>
+      )}
+    </>
   );
 }

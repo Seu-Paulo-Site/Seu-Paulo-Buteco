@@ -1,55 +1,184 @@
 @import "tailwindcss";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-/* globals.css */
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ==========================================================================
+   Seu Paulo Buteco — design tokens
+   Paleta extraída da própria logo: vermelho #A42129, preto e creme de papel.
+   ========================================================================== */
+@theme {
+  /* Tintas escuras (madeira/noite de boteco) */
+  --color-ink: #121010;
+  --color-ink-2: #1a1615;
+  --color-ink-3: #26201f;
+  --color-ink-4: #3a3230;
+
+  /* Creme de papel kraft — o mesmo tom do cardápio impresso */
+  --color-cream: #f7f2e8;
+  --color-cream-2: #ebe2d2;
+  --color-cream-3: #d8ccb6;
+
+  /* Vermelho da marca */
+  --color-brand: #a42129;
+  --color-brand-2: #c22b34;
+  --color-brand-deep: #75151c;
+
+  /* Âmbar do chope, usado com parcimônia */
+  --color-amber: #d9a441;
+
+  --font-display: var(--font-anton), "Arial Narrow", system-ui, sans-serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-dm-mono), ui-monospace, "SFMono-Regular", monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-
-
-@media (prefers-color-scheme: dark) {
+@layer base {
+  /* Declaradas fora do @theme de propósito: o Tailwind v4 descarta variáveis
+     de tema que nenhum utilitário usa, e estas só aparecem em CSS escrito à mão. */
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --focus-ring: #d9a441;
+    --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-cream);
+    font-family: var(--font-sans);
+    overflow-x: clip;
+    touch-action: manipulation;
+  }
+
+  /* Compensa a navbar fixa ao pular por âncora */
+  [id] {
+    scroll-margin-top: 6rem;
+  }
+
+  ::selection {
+    background-color: var(--color-brand);
+    color: var(--color-cream);
+  }
+
+  /* Longhands de propósito: o atalho `outline:` com var() não estava aplicando
+     a cor no Chrome, e caía em currentColor. */
+  :focus-visible {
+    outline-width: 2px;
+    outline-style: solid;
+    outline-color: var(--focus-ring);
+    outline-offset: 3px;
+    border-radius: 2px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  
+@layer components {
+  /* Título de exibição — Anton, caixa alta, bem apertado */
+  .display {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    line-height: 0.92;
+    letter-spacing: 0.005em;
+    text-wrap: balance;
+  }
 
+  /* Etiqueta pequena em mono, o detalhe "cardápio datilografado" */
+  .eyebrow {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    font-size: 0.6875rem;
+    letter-spacing: 0.28em;
+    line-height: 1;
+  }
+
+  /* Borda rasgada de pincel entre seções. A cor vem de currentColor,
+     então cada divisória assume o tom da seção que ela introduz. */
+  .brush {
+    display: block;
+    width: 100%;
+    height: clamp(18px, 3.2vw, 42px);
+    background-color: currentColor;
+    -webkit-mask-image: url("/brush-dec1.png");
+    mask-image: url("/brush-dec1.png");
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+
+  .brush-flip {
+    transform: scaleY(-1);
+  }
 }
 
-@keyframes fadeUp {
-  0% {
+@layer utilities {
+  /* Revela ao entrar na tela (ver componente Reveal) */
+  .reveal {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(22px);
+    transition:
+      opacity 0.7s var(--ease-out-soft),
+      transform 0.7s var(--ease-out-soft);
   }
-  100% {
+
+  .reveal-in {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
+  }
+
+  /* Sem JavaScript não há IntersectionObserver: o conteúdo aparece de cara
+     em vez de ficar invisível para sempre. */
+  @media (scripting: none) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .marquee-track {
+    animation: marquee 38s linear infinite;
+  }
+
+  /* Textura de papel das seções creme — sempre atrás do conteúdo. */
+  .paper-texture {
+    background-image: url("/img2.png");
+    background-size: 900px auto;
+    background-position: center top;
+    background-repeat: repeat;
+    opacity: 0.3;
+    mix-blend-mode: multiply;
   }
 }
 
-.fade-up {
-  animation: fadeUp 1s ease-out forwards;
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
 }
 
-html {
-  scroll-behavior: smooth;
-}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .marquee-track {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
