@@ -73,10 +73,10 @@ export default function Historia() {
             <div className="relative">
               <div className="overflow-hidden rounded-2xl shadow-[0_30px_70px_-30px_rgba(18,16,16,0.55)]">
                 <Image
-                  src="/frentebar.jpg"
-                  alt="Fachada do Seu Paulo Buteco, com toldo bordô e mesas na calçada"
-                  width={1047}
-                  height={611}
+                  src="/bar-fachada.jpg"
+                  alt="Fachada iluminada do Seu Paulo Buteco à noite, com as mesas na calçada"
+                  width={1448}
+                  height={1086}
                   sizes="(min-width: 1024px) 46rem, 92vw"
                   className="h-auto w-full"
                 />
@@ -84,10 +84,10 @@ export default function Historia() {
 
               <div className="relative -mt-14 ml-auto w-[62%] overflow-hidden rounded-2xl border-4 border-cream shadow-[0_26px_60px_-26px_rgba(18,16,16,0.6)] sm:-mt-20 sm:w-[54%]">
                 <Image
-                  src="/prato.jpg"
-                  alt="Mesa posta com o jogo americano do Seu Paulo Buteco"
-                  width={924}
-                  height={616}
+                  src="/bar-mesa.jpg"
+                  alt="Mesa na calçada do buteco, com copo e porta-guardanapos da casa"
+                  width={1448}
+                  height={1086}
                   sizes="(min-width: 1024px) 24rem, 55vw"
                   className="h-auto w-full"
                 />

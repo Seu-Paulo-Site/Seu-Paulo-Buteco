@@ -34,15 +34,15 @@ export default function Destaques() {
           />
           <div className="relative overflow-hidden rounded-2xl">
             <Image
-              src="/copo.jpg"
-              alt="Chope gelado servido no copo gravado com a logo do Seu Paulo Buteco"
-              width={1000}
-              height={1250}
-              sizes="(min-width: 1024px) 34rem, 92vw"
+              src="/canecas.jpg"
+              alt="As duas canecas esmaltadas do Seu Paulo Buteco, a branca e a de cobre"
+              width={482}
+              height={730}
+              sizes="(min-width: 1024px) 30rem, 92vw"
               className="h-auto w-full"
             />
           </div>
-          <p className="eyebrow mt-5 text-cream/40">O copo é nosso · a gelada é sua</p>
+          <p className="eyebrow mt-5 text-cream/40">Caneca da casa · a gelada é sua</p>
         </Reveal>
 
         <div>
