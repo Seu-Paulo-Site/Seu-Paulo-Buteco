@@ -1,11 +1,9 @@
 import Image from 'next/image';
 import { Instagram, MessageCircle } from 'lucide-react';
-import { BAR, DIAS, NAV, ORDEM_SEMANA, faixa, resumoAlmoco } from '@/app/lib/bar';
+import { BAR, DIAS, NAV, ORDEM_SEMANA, faixaDoDia } from '@/app/lib/bar';
 
 export default function Footer() {
-  const semana = ORDEM_SEMANA.map((i) => ({ ...DIAS[i], i }));
-  const comNoite = semana.filter((d) => d.noite);
-  const almoco = resumoAlmoco();
+  const abertos = ORDEM_SEMANA.map((i) => ({ ...DIAS[i], i })).filter((d) => d.janela);
 
   return (
     <footer className="border-t border-cream/10 bg-ink-2 px-5 pt-20 pb-10 sm:px-8">
@@ -63,43 +61,17 @@ export default function Footer() {
           </nav>
 
           <div>
-            <h2 className="eyebrow text-cream/35">Almoço</h2>
+            <h2 className="eyebrow text-cream/35">Aberto</h2>
             <ul className="mt-5 space-y-3">
-              {almoco ? (
-                <li className="flex justify-between gap-4 text-sm">
-                  <span className="text-cream/65">{almoco.dias}</span>
-                  <span className="font-mono text-[12px] tabular-nums text-cream/45">
-                    {almoco.horario}
-                  </span>
-                </li>
-              ) : (
-                semana
-                  .filter((d) => d.almoco)
-                  .map((d) => (
-                    <li key={d.dia} className="flex justify-between gap-4 text-sm">
-                      <span className="text-cream/65">{d.curto}</span>
-                      <span className="font-mono text-[12px] tabular-nums text-cream/45">
-                        {faixa(d.almoco)}
-                      </span>
-                    </li>
-                  ))
-              )}
-            </ul>
-
-            <h2 className="eyebrow mt-8 text-cream/35">Tarde &amp; noite</h2>
-            <ul className="mt-5 space-y-3">
-              {comNoite.map((d) => (
+              {abertos.map((d) => (
                 <li key={d.dia} className="flex justify-between gap-4 text-sm">
                   <span className="text-cream/65">{d.curto}</span>
                   <span className="font-mono text-[12px] tabular-nums text-cream/45">
-                    {faixa(d.noite)}
+                    {faixaDoDia(d.i)}
                   </span>
                 </li>
               ))}
             </ul>
-            <p className="mt-4 text-[13px] leading-relaxed text-cream/35">
-              Segunda fechado · terça só almoço.
-            </p>
 
             <address className="mt-7 text-sm leading-relaxed text-cream/50 not-italic">
               <strong className="font-semibold text-cream/70">Seu Paulo</strong>
