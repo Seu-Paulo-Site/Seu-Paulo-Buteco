@@ -80,7 +80,7 @@ type Dia = {
 const h = (hora: number, min = 0) => hora * 60 + min;
 
 export const DIAS: Dia[] = [
-  { dia: 'Domingo', curto: 'Dom', janela: { abre: h(12), fecha: h(19) } },
+  { dia: 'Domingo', curto: 'Dom', janela: { abre: h(12), fecha: h(18) } },
   { dia: 'Segunda-feira', curto: 'Seg', janela: null },
   { dia: 'Terça-feira', curto: 'Ter', janela: { abre: h(11, 30), fecha: h(15) } },
   { dia: 'Quarta-feira', curto: 'Qua', janela: { abre: h(11, 30), fecha: h(23) } },
